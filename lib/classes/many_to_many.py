@@ -13,9 +13,28 @@ class Article:
 
     @title.setter
     def title(self, value):
-        if not isinstance(value, str) or not value.strip():
-            raise ValueError("Title must be a non-empty string.")
-        self._title = value.strip()
+        # Check if title has already been set (immutable after first set)
+        if hasattr(self, '_title') and self._title is not None:
+            raise AttributeError("Title cannot be changed after instantiation")
+        
+        # Validate title type and length
+        if not isinstance(value, str):
+            raise TypeError("Title must be a string")
+        if not (5 <= len(value) <= 50):
+            raise ValueError("Title must be between 5 and 50 characters")
+        
+        self._title = value
+
+
+    @property
+    def author(self):
+        return self._author
+    
+    @author.setter
+    def author(self, value):
+        if not isinstance(value, Author):
+            raise ValueError("Author must be an instance of Author class.")
+        self._author = value
         
 class Author:
     def __init__(self, name):
