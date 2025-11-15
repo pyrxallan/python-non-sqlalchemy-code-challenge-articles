@@ -1,14 +1,13 @@
 class Article:
     def __init__(self, author, magazine, title):
         self._author = None
-        self._magazine = None
+        self._magazine = None  
         self._title = None
         
         self.author = author
         self.magazine = magazine
         self.title = title
         
-        # Append to the private lists, not the methods
         author._articles.append(self)
         magazine._articles.append(self)
     
@@ -18,7 +17,7 @@ class Article:
     
     @title.setter
     def title(self, value):
-        if hasattr(self, '_title') and self._title is not None:
+        if self._title is not None:
             raise AttributeError("Title cannot be changed after instantiation")
         
         if not isinstance(value, str):
@@ -51,8 +50,8 @@ class Article:
 class Author:
     def __init__(self, name):
         self._name = None
-        self.name = name
         self._articles = []
+        self.name = name
 
     def articles(self):
         return self._articles
@@ -75,7 +74,7 @@ class Author:
     
     @name.setter
     def name(self, value):
-        if hasattr(self, '_name') and self._name is not None:
+        if self._name is not None:
             raise AttributeError("Name cannot be changed after instantiation")
         
         if not isinstance(value, str):
@@ -89,9 +88,9 @@ class Magazine:
     def __init__(self, name, category):
         self._name = None
         self._category = None
+        self._articles = []
         self.name = name
         self.category = category
-        self._articles = []
 
     def articles(self):
         return self._articles
@@ -136,4 +135,3 @@ class Magazine:
         if len(value) == 0:
             raise ValueError("Category must be longer than 0 characters")
         self._category = value
-        
