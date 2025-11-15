@@ -10,6 +10,8 @@ class Article:
         
         author._articles.append(self)
         magazine._articles.append(self)
+
+        Article.all = []
     
     @property
     def title(self):
