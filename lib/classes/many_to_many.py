@@ -6,7 +6,10 @@ class Article:
         
 class Author:
     def __init__(self, name):
+        self.name = None
         self.name = name
+        self.articles = []
+
 
     def articles(self):
         pass
