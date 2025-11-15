@@ -5,6 +5,10 @@ class Article:
         self.title = title
         author.articles.append(self)
         magazine.articles.append(self)
+
+    @property
+    def title(self):
+        return self._title
         
 class Author:
     def __init__(self, name):
