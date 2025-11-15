@@ -3,6 +3,8 @@ class Article:
         self.author = author
         self.magazine = magazine
         self.title = title
+        author.articles.append(self)
+        magazine.articles.append(self)
         
 class Author:
     def __init__(self, name):
