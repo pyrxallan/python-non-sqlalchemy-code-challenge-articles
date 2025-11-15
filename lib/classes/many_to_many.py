@@ -82,7 +82,7 @@ class Author:
         if not isinstance(value, str):
             raise TypeError("Name must be a string")
         if len(value) == 0:
-            raise ValueError("Name must be longer than 0 characters")
+            raise ValueError("Name cannot be empty")
         
         self._name = value
 
