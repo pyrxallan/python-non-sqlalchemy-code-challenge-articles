@@ -1,17 +1,11 @@
 class Article:
     def __init__(self, author, magazine, title):
-        self._author = None
-        self._magazine = None  
-        self._title = None
-        
         self.author = author
         self.magazine = magazine
         self.title = title
         
         author._articles.append(self)
         magazine._articles.append(self)
-
-        Article.all = []
     
     @property
     def title(self):
@@ -19,15 +13,11 @@ class Article:
     
     @title.setter
     def title(self, value):
-        if self._title is not None:
-            raise AttributeError("Title cannot be changed after instantiation")
+        if hasattr(self, '_title') and self._title is not None:
+            return
         
-        if not isinstance(value, str):
-            raise TypeError("Title must be a string")
-        if not (5 <= len(value) <= 50):
-            raise ValueError("Title must be between 5 and 50 characters")
-        
-        self._title = value
+        if isinstance(value, str) and (5 <= len(value) <= 50):
+            self._title = value
     
     @property
     def author(self):
@@ -35,9 +25,8 @@ class Article:
     
     @author.setter
     def author(self, value):
-        if not isinstance(value, Author):
-            raise TypeError("Author must be of type Author")
-        self._author = value
+        if isinstance(value, Author):
+            self._author = value
     
     @property
     def magazine(self):
@@ -45,9 +34,8 @@ class Article:
     
     @magazine.setter
     def magazine(self, value):
-        if not isinstance(value, Magazine):
-            raise TypeError("Magazine must be of type Magazine")
-        self._magazine = value
+        if isinstance(value, Magazine):
+            self._magazine = value
 
 class Author:
     def __init__(self, name):
@@ -76,15 +64,11 @@ class Author:
     
     @name.setter
     def name(self, value):
-        if self._name is not None:
-            raise AttributeError("Name cannot be changed after instantiation")
+        if hasattr(self, '_name') and self._name is not None:
+            return
         
-        if not isinstance(value, str):
-            raise TypeError("Name must be a string")
-        if len(value) == 0:
-            raise ValueError("Name cannot be empty")
-        
-        self._name = value
+        if isinstance(value, str) and len(value) > 0:
+            self._name = value
 
 class Magazine:
     def __init__(self, name, category):
@@ -117,14 +101,11 @@ class Magazine:
     @property
     def name(self):
         return self._name
-
+    
     @name.setter
     def name(self, value):
-        if not isinstance(value, str):
-            raise TypeError("Name must be a string")
-        if len(value) < 2 or len(value) > 16:
-            raise ValueError("Name must be between 2 and 16 characters")
-        self._name = value
+        if isinstance(value, str) and (2 <= len(value) <= 16):
+            self._name = value
     
     @property
     def category(self):
@@ -132,8 +113,5 @@ class Magazine:
     
     @category.setter
     def category(self, value):
-        if not isinstance(value, str):
-            raise TypeError("Category must be a string")
-        if len(value) == 0:
-            raise ValueError("Category must be longer than 0 characters")
-        self._category = value
+        if isinstance(value, str) and len(value) > 0:
+            self._category = value
