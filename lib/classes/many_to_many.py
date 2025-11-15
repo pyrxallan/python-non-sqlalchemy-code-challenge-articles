@@ -33,8 +33,18 @@ class Article:
     @author.setter
     def author(self, value):
         if not isinstance(value, Author):
-            raise ValueError("Author must be an instance of Author class.")
+            raise TypeError("Author must be of type Author")
         self._author = value
+    
+    @property
+    def magazine(self):
+        return self._magazine
+    
+    @magazine.setter
+    def magazine(self, value):
+        if not isinstance(value, Magazine):
+            raise TypeError("Magazine must be of type Magazine")
+        self._magazine = value
         
 class Author:
     def __init__(self, name):
