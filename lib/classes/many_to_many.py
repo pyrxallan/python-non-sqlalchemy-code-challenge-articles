@@ -9,6 +9,13 @@ class Article:
     @property
     def title(self):
         return self._title
+    
+
+    @title.setter
+    def title(self, value):
+        if not isinstance(value, str) or not value.strip():
+            raise ValueError("Title must be a non-empty string.")
+        self._title = value.strip()
         
 class Author:
     def __init__(self, name):
